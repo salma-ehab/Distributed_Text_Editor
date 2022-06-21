@@ -50,7 +50,7 @@ const Docs = () => {
     useEffect(() => {
         if(socket === null || quill === null) return;
 
-        const integrateDelta = (delta, oldData, source) =>{
+        const integrateDelta = (delta, oldDelta, source) =>{
             if(source !== 'user') return;
             socket && socket.emit('send-changes', delta);
         }
@@ -61,6 +61,22 @@ const Docs = () => {
             quill && quill.off('text-change', integrateDelta);
         }
     }, [quill, socket])
+
+    useEffect(() => {
+        if(socket === null || quill === null) return;
+
+        const integrateDelta = (delta) =>{
+            quill.updateContents(delta);
+        }
+
+        socket && socket.on('receive-changes', integrateDelta);
+                  
+        return () => {
+            socket && socket.off('receive-changes', integrateDelta);
+        }
+    }, [quill, socket])
+
+
     return(
         <El>
             <Box className="storage" id = "holder"> </Box>
