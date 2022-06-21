@@ -1,8 +1,9 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import {Box} from '@mui/material';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
+import {io} from 'socket.io-client';
 
 const El = styled.div`
     background: #A0BCC2;
@@ -29,10 +30,22 @@ const toolbarOptions = [
 
 const Docs = () => {
 
+    const[socket, setSocket] = useState();
+    const[quill, setQuill] = useState();
+
     useEffect(() => {
         const qServer = new Quill('#holder', {theme: 'snow', modules: {toolbar: toolbarOptions}})
+        setQuill(qServer);
     }, [])
 
+    useEffect(() => {
+        const serverSocket = io('http://localhost:9000');
+        setSocket(socketServer);
+        
+        return () => {
+            serverSocket.disconnect();
+        }
+    })
     return(
         <El>
             <Box className="storage" id = "holder"> </Box>
