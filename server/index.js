@@ -10,5 +10,9 @@ const inOut = new Server(PORT,{
 });
 
 inOut.on('connection', socket => {
-    console.log('connected2');
+    
+    socket.on('send-changes', delta => {
+        console.log('connected with changes ', delta );
+
+    })
 });
