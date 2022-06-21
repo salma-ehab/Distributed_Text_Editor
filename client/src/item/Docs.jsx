@@ -30,20 +30,20 @@ const toolbarOptions = [
 
 const Docs = () => {
 
-    const[socket, setSocket] = useState();
-    const[quill, setQuill] = useState();
+   const[socket, setSocket] = useState();
+   const[quill, setQuill] = useState();
 
     useEffect(() => {
         const qServer = new Quill('#holder', {theme: 'snow', modules: {toolbar: toolbarOptions}})
-        setQuill(qServer);
+        //setQuill(qServer);
     }, [])
 
     useEffect(() => {
-        const serverSocket = io('http://localhost:9000');
+        const socketServer = io('http://localhost:9000');
         setSocket(socketServer);
         
         return () => {
-            serverSocket.disconnect();
+            socketServer.disconnect();
         }
     })
     return(
