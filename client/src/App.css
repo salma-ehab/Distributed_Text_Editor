@@ -1,0 +1,22 @@
+
+
+
+.storage{
+    
+  box-shadow: 0 0 5px 0 rgba(0, 0 , 0, 0.5);
+  margin: 8px auto 8px auto !important;
+  background: #E8EAE6;
+  min-height: 120vh;
+  width : 60%;
+}
+
+.ql-toolbar.ql-snow{
+top: 0;
+z-index: 1;
+display: flex;
+position: sticky;
+background: #C6DCE4;
+border: none !important; 
+justify-content: center;
+
+}
