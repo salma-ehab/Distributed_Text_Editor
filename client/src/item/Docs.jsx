@@ -35,7 +35,7 @@ const Docs = () => {
 
     useEffect(() => {
         const qServer = new Quill('#holder', {theme: 'snow', modules: {toolbar: toolbarOptions}})
-        //setQuill(qServer);
+        setQuill(qServer);
     }, [])
 
     useEffect(() => {
@@ -45,7 +45,22 @@ const Docs = () => {
         return () => {
             socketServer.disconnect();
         }
-    })
+    }, [])
+
+    useEffect(() => {
+        if(socket === null || quill === null) return;
+
+        const integrateDelta = (delta, oldData, source) =>{
+            if(source !== 'user') return;
+            socket && socket.emit('send-changes', delta);
+        }
+
+        quill && quill.on('text-change', integrateDelta);
+                  
+        return () => {
+            quill && quill.off('text-change', integrateDelta);
+        }
+    }, [quill, socket])
     return(
         <El>
             <Box className="storage" id = "holder"> </Box>
@@ -55,3 +70,4 @@ const Docs = () => {
 }
 
 export default Docs;
+
