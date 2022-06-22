@@ -1,6 +1,8 @@
-import { Server } from 'socket.io'
-
+import { Server } from 'socket.io';
+import Connection from './database/mongoDB.js';
 const PORT = 9000;
+
+Connection();
 
 const inOut = new Server(PORT,{
     cors: {
