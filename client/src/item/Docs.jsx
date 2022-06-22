@@ -4,7 +4,7 @@ import 'quill/dist/quill.snow.css';
 import {Box} from '@mui/material';
 import styled from '@emotion/styled';
 import {io} from 'socket.io-client';
-
+import {useParams} from 'react-router-dom';
 const El = styled.div`
     background: #A0BCC2;
 `
@@ -32,9 +32,12 @@ const Docs = () => {
 
    const[socket, setSocket] = useState();
    const[quill, setQuill] = useState();
+   const {id} = useParams();
 
     useEffect(() => {
         const qServer = new Quill('#holder', {theme: 'snow', modules: {toolbar: toolbarOptions}})
+        qServer.disable();
+        qServer.setText('Loading doc ');
         setQuill(qServer);
     }, [])
 
@@ -45,7 +48,7 @@ const Docs = () => {
         return () => {
             socketServer.disconnect();
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         if(socket === null || quill === null) return;
@@ -74,7 +77,17 @@ const Docs = () => {
         return () => {
             socket && socket.off('receive-changes', integrateDelta);
         }
-    }, [quill, socket])
+    }, [quill, socket]);
+
+    useEffect(() => {
+        if(quill ===null || socket === null) return;
+        socket && socket.once('load-document', document => {
+            quill && quill.setContents(document);
+            quill && quill.enable();
+        })
+        socket && socket.emit('get-document', id);
+
+    }, [quill,socket,id]);
 
 
     return(
@@ -86,4 +99,5 @@ const Docs = () => {
 }
 
 export default Docs;
+
 
