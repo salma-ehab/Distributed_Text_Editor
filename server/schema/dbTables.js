@@ -5,7 +5,7 @@ const dbTable = mongoose.Schema({
         type: String,
         required: true
     },
-    data: {
+    content: {
         type: Object,
         required: true
     }
