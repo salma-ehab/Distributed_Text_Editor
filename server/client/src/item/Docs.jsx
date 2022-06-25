@@ -42,7 +42,7 @@ const Docs = () => {
     }, [])
 
     useEffect(() => {
-        const socketServer = io('http://localhost:9000');
+        const socketServer = io('');
         setSocket(socketServer);
         
         return () => {
