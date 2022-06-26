@@ -12,7 +12,7 @@ This is a collaborative distributed text editor that allows multiple users to up
 
 1. Download the project repository with commit id: 5533b04
 
-  ![step 1](https://user-images.githubusercontent.com/54854067/175816198-c1e559b3-a912-4cdb-b347-505598317dfb.PNG)
+  ![image](https://user-images.githubusercontent.com/54854067/175817315-a039f7da-e1a8-4086-a505-f4c04d1d3087.png)
   
 2. Open the project directory in cmd and run the following commands
 ```
