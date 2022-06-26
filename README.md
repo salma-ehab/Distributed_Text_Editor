@@ -5,5 +5,5 @@ This is a collaborative distributed text editor that allows multiple users to up
 ## Guide ##
 
 The following Link generates a new Document with a new ID.   
-https://distributed-txt-editor2.herokuapp.com/ 
+https://distributed-txt-editor2.herokuapp.com/ <br />
 To allow multiple Users to use the same document, the generated new link has to be sent to all Collaborators.  
